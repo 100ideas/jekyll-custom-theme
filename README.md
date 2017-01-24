@@ -12,7 +12,7 @@
 3. rename your new (forked) repo of the theme. settings > rename:
   - rename as desired
   - note branch name listed under **github pages** ("master" or "gh-pages") - gh-pages in this case
-  - check `https://<your-github-username>.github.io/jekyll-custom-theme/` to see if the theme is working
+  - check `https://<your-github-username>.github.io/jekyll-custom-theme/` to see if the theme is working - in my case, https://100ideas.github.io/jekyll-custom-theme/
 
 4. clone to local machine (using new repo name in this case of 'jekyll-custom-theme'):
 
@@ -73,9 +73,14 @@
 
 7. To get updates from now on, `git fetch upstream` will pull updates to the theme and store them in `upstream`. Use `get merge upstream/master` to merge changes with the current branch (more info below).
 
-## Customizing the theme
+## Differences between the base configuration and demo configuration
 
-Let's look at the differences between our local `master` branch and the `gh-pages` remote branch currently being published by github ('origin' is how we refer to the `remote` copy of our git repo hosted on github.com's servers; `upstream` refers to the original repo we forked). We can use the `--name-only` option to return a list of the changed files without the changes themeselves:
+**On forks**: When we forked the theme on github.com, our new repo was initialized with copies of all the branches in the source repo (`develop`, `master`, & `gh-pages` as above). The `gh-pages` branch still has the content for the demo site from the source repo, while the `master` branch contains the bare minumum needed to get started with the theme.
+
+**On remotes**: "Remotes" are separate repos that git tracks for synchronizing (`push`ing or `pull`ing) with the local repository. The remote version of a repository hosted by github is typically named `origin`, and `remote/origin/master` refers to the `master` branch in the copy of the repo on github's servers; `remote/upstream/master` refers to the `master` branch in the repo that was the source of the fork after we've added it as above).
+
+
+Let's use `git diff` to explore the differences between our local `master` branch and the `gh-pages` remote branch currently being published by github. We can use the `--name-only` option to return a list of the changed files without the changes themeselves:
 
 ```
 $ git fetch upstream
@@ -96,7 +101,9 @@ media/index.md
 terms/index.md
 ```
 
-This listing shows us that the `gh-pages` branch on our remote has many different files when compared with our local `master` branch. Of particular note are the `.yml` files, which proide configuration options and structured metadata for jekyll. Let's start by editing the `_config.yml` file
+This listing shows us that the `gh-pages` branch on our remote has many different files when compared with our local `master` branch. Of particular note are the `.yml` files, which proide configuration options and structured metadata for jekyll. We can look at the differences of all the `.yml` files with `git diff master upstream/gh-pages */*.yml`.
+
+Let's start by editing the `_config.yml` file
 
 # About the theme we're using - Skinny Bones Jekyll Starter
 
