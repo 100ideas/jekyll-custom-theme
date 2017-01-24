@@ -74,12 +74,11 @@
 
 7. To get updates from now on, `git fetch upstream` will pull updates to the theme and store them in `upstream`. Use `get merge upstream/master` to merge changes with the current branch (more info below).
 
-## Differences between the base configuration and demo configuration
+## removing theme demo content (quick git tutorial)
 
 **On forks**: When we forked the theme on github.com, our new repo was initialized with copies of all the branches in the source repo (`develop`, `master`, & `gh-pages` as above). The `gh-pages` branch still has the content for the demo site from the source repo, while the `master` branch contains the bare minumum needed to get started with the theme.
 
 **On remotes**: "Remotes" are separate repos that git tracks for synchronizing (`push`ing or `pull`ing) with the local repository. The remote version of a repository hosted by github is typically named `origin`, and `remote/origin/master` refers to the `master` branch in the copy of the repo on github's servers; `remote/upstream/master` refers to the `master` branch in the repo that was the source of the fork after we've added it as above).
-
 
 Let's use `git diff` to explore the differences between our local `master` branch and the `gh-pages` remote branch currently being published by github. We can use the `--name-only` option to return a list of the changed files without the changes themeselves:
 
@@ -114,7 +113,7 @@ This listing shows us that the `gh-pages` branch on our remote has many differen
   url: http://100ideas.github.io/jekyll-custom-theme
   ```
 
-2. commit your changes to master, create and merge them into a new local `gh-pages` branch, and push it to github ([animated git review](http://learngitbranching.js.org/?NODEMO&command=level%20intro3)):
+2. commit your changes to master, merge them into a new local `gh-pages` branch, and push it to github, --force to replace remote branch ([animated git review](http://learngitbranching.js.org/?NODEMO&command=level%20intro3)):
 
   ```bash
   $ git status
@@ -152,10 +151,26 @@ This listing shows us that the `gh-pages` branch on our remote has many differen
    feed:
      path: atom.xml
 
-  $
+  # origin gh-pages branch already exists & is full of demo content. Instead of
+  # merging local changes into the remote branch (normal behavior of git push),
+  # use git push --force to completely replace remote branch with local content
+  $ git push --force origin gh-pages
   ```
+  http://<your-github-username>.github.io/jekyll-custom-theme should now be mostly blank. If it looks like the css styling or JS is broken, check the web inspector console for errors and the url specified in `_config.yml`.
 
-; replace default images; commit; git merge upstream/gh-pages -- articles; commit; merge into gh-pages; git push --force
+## Using jekyll
+
+0. jekyll folder conventions - what gets served?
+1. replace default images; commit;
+2. `git ls-tree upstream/gh-pages about` look for about folder in history
+3. `git checkout upstream/gh-pages -- articles`; commit; merge into gh-pages;
+
+### workflow
+1. plan:
+  - option 1: use master (or other branches) for local development; install ruby, gem, bundler, jekyll; use jekyll to preview locally; commit often; merge changes into gh-pages for "production"; push to origin
+  - option 2: commit changes to master or gh-pages & push directly to origin; mostly use github.com online txt editor to author content
+
+git push --force
 
 # About the theme we're using - Skinny Bones Jekyll Starter
 
