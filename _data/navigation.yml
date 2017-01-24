@@ -4,3 +4,8 @@
   url:
   excerpt:
   image:
+
+- title: About
+  url: /about/
+  excerpt: "All about Skinny Bones for Jekyll."
+  image: fillmurray_400x250.jpg
