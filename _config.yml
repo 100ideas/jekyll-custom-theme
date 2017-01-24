@@ -5,7 +5,7 @@ description: "trying to remove all demo content in gh-pages branch"
 logo: # 120x120 px default image used for Twitter summary card
 teaser: # 400x250 px default teaser image used in image archive grid
 locale: en
-url:
+url: https://100ideas.github.io/jekyll-custom-theme/
 feed:
   path: atom.xml
 
